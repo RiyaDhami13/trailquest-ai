@@ -18,7 +18,7 @@ It is built for students, remote workers, and anyone looking to break screen fat
 ## Demo
 *(Include a screenshot or GIF of your Streamlit app running locally here)*
 
-![TrailQuest AI App Screenshot](https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/trailquest-ai/main/screenshot.png)
+![TrailQuest AI App Screenshot](https://raw.githubusercontent.com/RiyaDhami13/trailquest-ai/main/screenshot.png)
 
 > **Example Quest Output:**
 > 1. **Route Goal:** Walk 15 minutes down your neighborhood street while looking for 3 different types of leaves.
