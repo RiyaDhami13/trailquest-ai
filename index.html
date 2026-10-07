@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TrailQuest AI — Touch Grass Challenge</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; line-height: 1.6; background: #0f172a; color: #f8fafc; }
+    h1 { color: #38bdf8; }
+    .card { background: #1e293b; border-radius: 12px; padding: 24px; margin: 20px 0; border: 1px solid #334155; }
+    img { max-width: 100%; border-radius: 8px; margin-top: 15px; }
+    .btn { display: inline-block; background: #0284c7; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: bold; margin-top: 10px; }
+    .btn:hover { background: #0369a1; }
+  </style>
+</head>
+<body>
+  <h1>🥾 TrailQuest AI</h1>
+  <p>An offline-first, local AI outdoor adventure generator built for the Hacktoberfest 2026 Touch Grass Challenge.</p>
+
+  <div class="card">
+    <h2>📱 Application Demo</h2>
+    <p>Runs locally via Ollama (Google Gemma 2B / Qwen 2.5 3B) and Streamlit with 0% data egress.</p>
+    <img src="screenshot.png" alt="TrailQuest AI App Screenshot">
+  </div>
+
+  <div class="card">
+    <h2>💻 Quick Local Run</h2>
+    <pre><code>git clone https://github.com/RiyaDhami13/trailquest-ai.git
+pip install -r requirements.txt
+streamlit run app.py</code></pre>
+  </div>
+
+  <a href="https://github.com/RiyaDhami13/trailquest-ai" class="btn">View Source Code on GitHub</a>
+</body>
+</html>
