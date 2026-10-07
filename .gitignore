@@ -1,0 +1,12 @@
+# Python bytecode & environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+ENV/
+
+# Local SQLite databases
+*.db
+
+# Streamlit config
+.streamlit/
