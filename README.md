@@ -28,7 +28,7 @@ It is built for students, remote workers, and anyone looking to break screen fat
 ---
 
 ## Code
-{% github https://github.com/YOUR_GITHUB_USERNAME/trailquest-ai %}
+{% https://github.com/RiyaDhami13/trailquest-ai/blob/main/app.py %}
 
 ---
 
