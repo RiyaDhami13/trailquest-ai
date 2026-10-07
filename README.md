@@ -16,7 +16,7 @@ It is built for students, remote workers, and anyone looking to break screen fat
 ---
 
 ## Demo
-*(Include a screenshot or GIF of your Streamlit app running locally here)*
+
 
 ![TrailQuest AI App Screenshot](https://github.com/RiyaDhami13/trailquest-ai/blob/main/screenshot.PNG)
 
