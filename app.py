@@ -409,6 +409,12 @@ def stream_quest_generation(
 ) -> Generator[Tuple[str, bool, str, Optional[OutdoorQuest]], None, None]:
     """Streams tokens from local Ollama model with schema constraint and automatic fallback."""
     installed = get_installed_ollama_models()
+    if not installed:
+        raise RuntimeError(
+            "Ollama service is offline or unreachable. "
+            "Please start Ollama by running `ollama serve` in your terminal."
+        )
+
     candidates = [primary_model]
     if fallback_model and fallback_model not in candidates:
         candidates.append(fallback_model)

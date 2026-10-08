@@ -1,3 +1,4 @@
+# Python bytecode & environments
 __pycache__/
 *.py[cod]
 .venv/
