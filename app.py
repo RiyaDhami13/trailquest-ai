@@ -4,6 +4,7 @@ import json
 import time
 import io
 import sqlite3
+import textwrap
 from datetime import datetime, timedelta
 from typing import Generator, Tuple, Optional, List, Dict, Any
 from pydantic import BaseModel, Field
@@ -439,19 +440,19 @@ with st.sidebar:
     
     sc1, sc2 = st.columns(2)
     with sc1:
-        st.markdown(f"""
-        <div class="stat-card">
-            <div class="stat-val streak">🔥 {stats['streak_days']}</div>
-            <div class="stat-label">Day Streak</div>
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown(textwrap.dedent(f"""
+            <div class="stat-card">
+                <div class="stat-val streak">🔥 {stats['streak_days']}</div>
+                <div class="stat-label">Day Streak</div>
+            </div>
+        """), unsafe_allow_html=True)
     with sc2:
-        st.markdown(f"""
-        <div class="stat-card">
-            <div class="stat-val">🌲 {stats['total_quests']}</div>
-            <div class="stat-label">Quests Done</div>
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown(textwrap.dedent(f"""
+            <div class="stat-card">
+                <div class="stat-val">🌲 {stats['total_quests']}</div>
+                <div class="stat-label">Quests Done</div>
+            </div>
+        """), unsafe_allow_html=True)
 
     st.caption(f"⏱️ **Total Outdoor Time:** {stats['total_minutes']} minutes logged")
     
@@ -663,31 +664,31 @@ if st.session_state["current_quest"]:
         )
 
     # Main Card Render
-    st.markdown(f"""
-    <div class="quest-card">
-        <div class="quest-title">📜 {quest.title}</div>
-        
-        <div class="step-box">
-            <div class="step-label label-goal">🎯 Step 1: Route & Physical Goal</div>
-            <div class="step-text">{quest.goal}</div>
-        </div>
-        
-        <div class="step-box observation">
-            <div class="step-label label-observation">👁️ Step 2: Observation & Mindfulness</div>
-            <div class="step-text">{quest.observation}</div>
-        </div>
-        
-        <div class="step-box reflection">
-            <div class="step-label label-reflection">🧘 Step 3: Reflection & Photo Challenge</div>
-            <div class="step-text">{quest.reflection}</div>
-        </div>
+    st.markdown(textwrap.dedent(f"""
+        <div class="quest-card">
+            <div class="quest-title">📜 {quest.title}</div>
+            
+            <div class="step-box">
+                <div class="step-label label-goal">🎯 Step 1: Route & Physical Goal</div>
+                <div class="step-text">{quest.goal}</div>
+            </div>
+            
+            <div class="step-box observation">
+                <div class="step-label label-observation">👁️ Step 2: Observation & Mindfulness</div>
+                <div class="step-text">{quest.observation}</div>
+            </div>
+            
+            <div class="step-box reflection">
+                <div class="step-label label-reflection">🧘 Step 3: Reflection & Photo Challenge</div>
+                <div class="step-text">{quest.reflection}</div>
+            </div>
 
-        <div class="step-box safety">
-            <div class="step-label label-safety">💡 Safety & Weather Tip</div>
-            <div class="step-text">{quest.safety_tip}</div>
+            <div class="step-box safety">
+                <div class="step-label label-safety">💡 Safety & Weather Tip</div>
+                <div class="step-text">{quest.safety_tip}</div>
+            </div>
         </div>
-    </div>
-    """, unsafe_allow_html=True)
+    """), unsafe_allow_html=True)
     
     # Metadata Caption
     if meta:
