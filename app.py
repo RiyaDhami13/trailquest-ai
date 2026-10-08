@@ -73,39 +73,59 @@ st.markdown("""
 
     /* Quest Card Layout */
     .quest-card {
-        background: #1e293b;
-        border-radius: 16px;
-        border: 1px solid #334155;
-        padding: 24px;
+        background: #111827;
+        border-radius: 20px;
+        border: 1px solid #1f2937;
+        padding: 28px;
         margin-top: 20px;
-        margin-bottom: 20px;
+        margin-bottom: 24px;
         box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
     }
-    .quest-title {
+    .quest-brand-header {
         color: #38bdf8;
-        font-size: 1.5rem;
+        font-size: 1.25rem;
+        font-weight: 800;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        margin-bottom: 2px;
+    }
+    .quest-subtitle {
+        color: #94a3b8;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        margin-bottom: 14px;
+    }
+    .quest-header-divider {
+        border-bottom: 1px solid #1f2937;
+        margin-bottom: 18px;
+    }
+    .quest-main-title {
+        color: #ffffff;
+        font-size: 1.6rem;
         font-weight: 700;
-        margin-bottom: 16px;
-        border-bottom: 1px solid #334155;
-        padding-bottom: 10px;
+        margin-bottom: 20px;
+        line-height: 1.25;
     }
     .step-box {
-        background: #0f172a;
-        border-left: 4px solid #38bdf8;
-        border-radius: 8px;
-        padding: 14px 18px;
-        margin-bottom: 12px;
+        background: #0b1120;
+        border-radius: 12px;
+        padding: 16px 20px;
+        margin-bottom: 16px;
+        border: 1.5px solid #38bdf8;
     }
-    .step-box.observation { border-left-color: #10b981; }
-    .step-box.reflection { border-left-color: #a855f7; }
-    .step-box.safety { border-left-color: #f59e0b; background: #18181b; }
+    .step-box.goal { border-color: #38bdf8; }
+    .step-box.observation { border-color: #34d399; }
+    .step-box.reflection { border-color: #c084fc; }
+    .step-box.safety { border-color: #fbbf24; }
     
     .step-label {
-        font-size: 0.825rem;
+        font-size: 0.85rem;
         text-transform: uppercase;
         letter-spacing: 0.05em;
         font-weight: 700;
-        margin-bottom: 4px;
+        margin-bottom: 8px;
     }
     .label-goal { color: #38bdf8; }
     .label-observation { color: #34d399; }
@@ -116,6 +136,22 @@ st.markdown("""
         font-size: 1rem;
         line-height: 1.5;
         color: #f1f5f9;
+        margin: 0;
+    }
+    .quest-footer-divider {
+        border-top: 1px solid #1f2937;
+        margin-top: 24px;
+        padding-top: 14px;
+    }
+    .quest-footer-meta {
+        color: #94a3b8;
+        font-size: 0.85rem;
+        margin-bottom: 4px;
+    }
+    .quest-footer-sub {
+        color: #38bdf8;
+        font-size: 0.85rem;
+        font-weight: 500;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -353,7 +389,7 @@ def get_installed_ollama_models() -> List[str]:
     """Fetch list of locally available models in Ollama."""
     try:
         models_res = ollama.list()
-        return [m.model for m in models_res.models]
+        return [m.model for m in models_res.models if m.model is not None]
     except Exception:
         return []
 
@@ -663,39 +699,40 @@ if st.session_state["current_quest"]:
             f"Quest was successfully generated using fallback model `{meta.get('model')}`."
         )
 
-    # Main Card Render
-    st.markdown(textwrap.dedent(f"""
-        <div class="quest-card">
-            <div class="quest-title">📜 {quest.title}</div>
-            
-            <div class="step-box">
-                <div class="step-label label-goal">🎯 Step 1: Route & Physical Goal</div>
-                <div class="step-text">{quest.goal}</div>
-            </div>
-            
-            <div class="step-box observation">
-                <div class="step-label label-observation">👁️ Step 2: Observation & Mindfulness</div>
-                <div class="step-text">{quest.observation}</div>
-            </div>
-            
-            <div class="step-box reflection">
-                <div class="step-label label-reflection">🧘 Step 3: Reflection & Photo Challenge</div>
-                <div class="step-text">{quest.reflection}</div>
-            </div>
+    # Main Card Render matching Image 2
+    duration_val = meta.get("duration", 30)
+    location_val = meta.get("location", "local park & neighborhood")
+    vibe_val = meta.get("vibe", "Mindful & Chill")
+    weather_val = meta.get("weather", "Clear / Sunny Day")
 
-            <div class="step-box safety">
-                <div class="step-label label-safety">💡 Safety & Weather Tip</div>
-                <div class="step-text">{quest.safety_tip}</div>
-            </div>
-        </div>
-    """), unsafe_allow_html=True)
-    
-    # Metadata Caption
-    if meta:
-        st.caption(
-            f"⏱️ **Duration:** {meta.get('duration')} mins | 📍 **Setting:** {meta.get('location')} | "
-            f"🌿 **Vibe:** {meta.get('vibe')} | 🌦️ **Weather:** {meta.get('weather')} | 🤖 **AI:** `{meta.get('model')}`"
-        )
+    card_html = (
+        f'<div class="quest-card">'
+        f'<div class="quest-brand-header">🥾 TRAILQUEST AI</div>'
+        f'<div class="quest-subtitle">OFFLINE OUTDOOR QUEST CARD • {duration_val} MINS</div>'
+        f'<div class="quest-header-divider"></div>'
+        f'<div class="quest-main-title">{quest.title}</div>'
+        f'<div class="step-box goal">'
+        f'<div class="step-label label-goal">🥾 STEP 1: ROUTE & GOAL</div>'
+        f'<div class="step-text">{quest.goal}</div>'
+        f'</div>'
+        f'<div class="step-box observation">'
+        f'<div class="step-label label-observation">👁️ STEP 2: OBSERVATION & MINDFULNESS</div>'
+        f'<div class="step-text">{quest.observation}</div>'
+        f'</div>'
+        f'<div class="step-box reflection">'
+        f'<div class="step-label label-reflection">🧘 STEP 3: REFLECTION & PHOTO CHALLENGE</div>'
+        f'<div class="step-text">{quest.reflection}</div>'
+        f'</div>'
+        f'<div class="step-box safety">'
+        f'<div class="step-label label-safety">💡 SAFETY & TRAIL TIP</div>'
+        f'<div class="step-text">{quest.safety_tip}</div>'
+        f'</div>'
+        f'<div class="quest-footer-divider"></div>'
+        f'<div class="quest-footer-meta">Setting: {location_val} | Vibe: {vibe_val} | Weather: {weather_val}</div>'
+        f'<div class="quest-footer-sub">Generated 100% locally by TrailQuest AI • 0 Egress</div>'
+        f'</div>'
+    )
+    st.markdown(card_html, unsafe_allow_html=True)
 
     # Completion Tracker Button
     st.markdown("---")
