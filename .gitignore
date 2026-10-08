@@ -1,9 +1,11 @@
-# Python bytecode & environments
 __pycache__/
 *.py[cod]
 .venv/
 venv/
 ENV/
+
+# IDE / Editor settings
+.vscode/
 
 # Local SQLite databases
 *.db
