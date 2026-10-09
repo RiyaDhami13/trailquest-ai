@@ -382,12 +382,19 @@ class OutdoorQuest(BaseModel):
     )
 
 
+import requests
+
 # -----------------------------------------------------------------------------
 # 5. Local Ollama Pipeline & Fallback Manager
 # -----------------------------------------------------------------------------
 def get_installed_ollama_models() -> List[str]:
-    """Fetch list of locally available models in Ollama."""
+    """Fetch list of locally available models in Ollama with a connection timeout."""
     try:
+        # First verify server is responsive within 5 seconds to prevent cold-boot hangs
+        res = requests.get("http://localhost:11434/api/tags", timeout=5)
+        if res.status_code != 200:
+            return []
+        
         models_res = ollama.list()
         return [m.model for m in models_res.models if m.model is not None]
     except Exception:
